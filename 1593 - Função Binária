@@ -4,16 +4,16 @@
 int divide_por_2(char numero[]) {
     int len = strlen(numero);
     int resto = 0;
-    char resultado[1001];
+    char quociente[1001];
     int pos = 0;
     for (int i = 0; i < len; i++) {
         int atual = resto * 10 + (numero[i] - '0');
-        resultado[pos] = (atual / 2) + '0';
+        quociente[pos] = (atual / 2) + '0';
         pos++;
         resto = atual % 2;
     }
     int inicio = 0;
-    while (inicio < pos && resultado[inicio] == '0') {
+    while (inicio < pos && quociente[inicio] == '0') {
         inicio++;
     }
 
@@ -23,13 +23,12 @@ int divide_por_2(char numero[]) {
     } else {
         int j = 0;
         for (int i = inicio; i < pos; i++) {
-            numero[j++] = resultado[i];
+            numero[j++] = quociente[i];
         }
         numero[j] = '\0';
     }
     return resto;
 }
-
 int contar_uns(char numero[]) {
     int contador = 0;
     while (numero[0] != '0') {
@@ -39,15 +38,13 @@ int contar_uns(char numero[]) {
     }
     return contador;
 }
-
 int main() {
-    int T;
+    int n;
+    scanf("%d",&n);
     char numero[1001];
-    scanf("%d", &T);
-    for (int i = 0; i < T; i++) {
+    for(int i = 0;i<n;i++){
         scanf("%s", numero);
-        int resultado = contar_uns_binario(numero);
-        printf("%d\n", resultado);
-    }
+        int resultado = contar_uns(numero);
+        printf("%d\n", resultado);}
     return 0;
 }
