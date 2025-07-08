@@ -10,7 +10,6 @@ int main() {
         char linha[201];
         int frequencia[26] = {0};
         fgets(linha, sizeof(linha), stdin); 
-        // Contar frequência de cada letra
         for (int i = 0; i < strlen(linha); i++) {
             if (isalpha(linha[i])) {
                 char letra = tolower(linha[i]); 
@@ -30,6 +29,5 @@ int main() {
         }
         printf("\n");
     }
-    
     return 0;
 }
