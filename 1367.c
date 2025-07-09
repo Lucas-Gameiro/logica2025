@@ -18,7 +18,7 @@ int main() {
                     resolvido[indice] = 1;
                     tempo_correto[indice] = tempo;
                 }
-            } else { // resultado é "incorrect"
+            } else {
                 if (!resolvido[indice]) {
                     tentativas_erradas[indice]++;
                 }
