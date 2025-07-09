@@ -30,7 +30,7 @@ int main() {
             strcpy(f, "0");
         }
         char c[11];
-        strcpy(c, cutoff + 2); // Pular "0."
+        strcpy(c, cutoff + 2);
         if (cmp(f, c)) {
             r++;
         }
