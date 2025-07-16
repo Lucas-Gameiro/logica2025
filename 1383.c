@@ -1,56 +1,77 @@
 #include <stdio.h>
- 
-int n;
-int matriz[9][9];
-int verificar() {
-    int i, j, k;
-    int usado[10];
-    for (i = 0; i < 9; i++) {
-        for (k = 1; k <= 9; k++) usado[k] = 0;
-        for (j = 0; j < 9; j++) {
-            if (usado[matriz[i][j]]) return 0;
-            usado[matriz[i][j]] = 1;
-        }
-    }
-    for (j = 0; j < 9; j++) {
-        for (k = 1; k <= 9; k++) usado[k] = 0;
-        for (i = 0; i < 9; i++) {
-            if (usado[matriz[i][j]]) return 0;
-            usado[matriz[i][j]] = 1;
-        }
-    }
-    int ri, rj;
-    for (ri = 0; ri < 9; ri += 3) {
-        for (rj = 0; rj < 9; rj += 3) {
-            for (k = 1; k <= 9; k++) usado[k] = 0;
-            for (i = ri; i < ri + 3; i++) {
-                for (j = rj; j < rj + 3; j++) {
-                    if (usado[matriz[i][j]]) return 0;
-                    usado[matriz[i][j]] = 1;
-                }
-            }
-        }
-    }
-    return 1;
-}
+#include <ctype.h>
+#include <string.h>
 
-int main() {
-    scanf("%d", &n);
-    int inst;
-    for (inst = 1; inst <= n; inst++) {
-        int i, j;
-        for (i = 0; i < 9; i++) {
-            for (j = 0; j < 9; j++) {
-                scanf("%d", &matriz[i][j]);
-            }
+int v_linha(char linha[10]){
+    int usado[10]={0};
+    for(int i=0;i<9;i++){
+        int num = linha[i]-'0';
+        if(usado[num]==0){
+            usado[num] = 1;
         }
-        printf("Instancia %d\n", inst);
-        if (verificar()) {
+        else{
+            return -1;
+        }}
+    return 0;
+}
+int v_coluna(char coluna[10]){
+    int usado[10]={0};
+    for(int i=0;i<9;i++){
+        int num = coluna[i]-'0';
+        if(usado[num]==0){
+            usado[num] = 1;
+        }
+        else{
+            return -1;
+        }}
+    return 0;
+}
+int main() {
+    int n, r=0;
+    char sudoku[10][10], colunas[10][10];
+    scanf("%i", &n);
+    for(int a=1;a<n+1;a++){
+        printf("Instancia %i\n",a);
+        for(int l=0;l<9;l++){
+            for(int i=0;i<9;i++){
+                int num; 
+                scanf("%d", &num);
+                sudoku[l][i] = num + '0';
+            }
+            if(r==0){
+                if(v_linha(sudoku[l])==-1){
+                    r = -1;
+            }}}
+        if(r==0){
+            for(int i=0;i<9;i++){
+                for(int j=0;j<9;j++){
+                   colunas[i][j] = sudoku[j][i];
+                }
+                if(r==0){
+                    if(v_coluna(colunas[i])==-1){
+                        r = -1;
+                }}}}
+        if(r==0){
+            for(int lin=0;lin<9;lin += 3){
+                for(int col=0;col<9;col += 3){
+                    if(r==0){
+                    int usado[10]={0};
+                    for(int i=0;i<3;i++){
+                        for(int j=0;j<3;j++){
+                            int num = sudoku[lin + i][col + j]-'0';
+                            if(usado[num] == 0){
+                                usado[num]=1;}
+                            else{
+                                r = -1;
+                            }}}}}}}
+        if(r==0){
             printf("SIM\n");
-        } else {
+        }
+        else{
             printf("NAO\n");
         }
         printf("\n");
-    }
+        r=0;
+            }
     return 0;
 }
