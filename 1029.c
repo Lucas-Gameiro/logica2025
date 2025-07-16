@@ -1,30 +1,29 @@
 #include <stdio.h>
 typedef struct{
-    int f;
-    int n;
+    int calls;
 }F;
-int fibo(F *f1, int f){
-    if (f==1){
-        f1->n++;
-        return 1;
-    }
-    if (f==0){
-        f1->n++;
+long long int fibonacci(long long int num,F *p1){
+    if(num==0){
         return 0;
     }
     else{
-        f1->n++;
-        return fibo(f1, f-1) + fibo(f1, f-2);
+        if(num==1){
+            return 1;
+        }
+    }
+    if(num>1){
+        p1 -> calls += 2;
+        return fibonacci(num-1,p1)+fibonacci(num-2,p1);
     }
 }
-int main() {
-    int b,a;
-    scanf("%i",&b);
-    for(int i=0;i<b;i++){
-        scanf("%i",&a);
-        F f1= {a,-1};
-        f1.f = fibo(&f1, f1.f);
-        printf("fib(%i) = %i calls = %i\n",a, f1.f, f1.n);
+int main(){
+    long long int n, x;
+    scanf("%lli", &n);
+    for(int i=0;i<n;i++){
+        scanf("%lli", &x);
+        F p1 = {0};
+        long long int fibo = fibonacci(x, &p1);
+        printf("fib(%lli) = %lli calls = %i\n",x,fibo,p1.calls);
     }
     return 0;
 }
